@@ -26,26 +26,26 @@ const AuditLogs = () => {
   }, []);
 
   return (
-    <div>
+    <div className="font-sans">
       <Navbar
         title="Security Audit Logs"
-        subtitle="Immutable database-backed platform audit trail"
+        subtitle="Immutable enterprise platform audit trail"
       />
 
       <div className="p-8 max-w-7xl mx-auto space-y-6">
-        <div className="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-4 shadow-xs">
+        <div className="flex items-center justify-between bg-white border border-[#E8E0DE] rounded-xl p-5 shadow-xs">
           <div>
-            <h2 className="text-sm font-bold text-gray-900">
+            <h2 className="font-serif text-base font-bold text-[#1A1A1A]">
               System Audit Trail
             </h2>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-[#6B6B6B]">
               Every sensitive action is recorded in the immutable audit trail
             </p>
           </div>
           <button
             onClick={fetchLogs}
             title="Refresh"
-            className="p-1.5 border border-gray-200 rounded text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+            className="p-2 border border-[#E8E0DE] rounded-lg text-[#6B6B6B] hover:text-[#1A1A1A] hover:bg-[#F5F1F0] transition-colors"
           >
             <RefreshCw className="w-4 h-4" />
           </button>
@@ -61,10 +61,10 @@ const AuditLogs = () => {
             description="There are currently no audit log records available."
           />
         ) : (
-          <div className="bg-white border border-gray-200 rounded-lg overflow-x-auto shadow-xs">
+          <div className="bg-white border border-[#E8E0DE] rounded-xl overflow-x-auto shadow-xs">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-gray-50 border-b border-gray-200 text-gray-500 uppercase tracking-wider font-semibold text-[11px]">
+                <tr className="bg-[#F5F1F0] border-b border-[#E8E0DE] text-[#6B6B6B] uppercase tracking-wider font-semibold text-[11px]">
                   <th className="py-3 px-4">Timestamp</th>
                   <th className="py-3 px-4">User</th>
                   <th className="py-3 px-4">Action</th>
@@ -72,33 +72,33 @@ const AuditLogs = () => {
                   <th className="py-3 px-4">Details</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-[#E8E0DE]">
                 {logs.map((log) => (
                   <tr
                     key={log._id}
-                    className="hover:bg-gray-50/70 transition-colors"
+                    className="hover:bg-[#F5F1F0]/50 transition-colors"
                   >
-                    <td className="py-3 px-4 text-gray-500 whitespace-nowrap">
+                    <td className="py-3.5 px-4 text-[#6B6B6B] whitespace-nowrap">
                       <div className="flex items-center gap-1.5">
-                        <Clock className="w-3 h-3 text-gray-400" />
+                        <Clock className="w-3.5 h-3.5 text-[#9B9B9B]" />
                         <span>{new Date(log.createdAt).toLocaleString()}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4 font-medium text-gray-800">
+                    <td className="py-3.5 px-4 font-semibold text-[#1A1A1A]">
                       {log.userId?.name || "System"}
                     </td>
-                    <td className="py-3 px-4">
-                      <span className="font-mono text-[11px] bg-slate-100 text-slate-800 px-2 py-0.5 rounded font-semibold border border-slate-200">
+                    <td className="py-3.5 px-4">
+                      <span className="font-mono text-[11px] bg-[#6B1A1A]/10 text-[#6B1A1A] px-2.5 py-0.5 rounded-full font-semibold border border-[#6B1A1A]/20">
                         {log.action}
                       </span>
                     </td>
-                    <td className="py-3 px-4">
-                      <span className="inline-flex items-center gap-1 text-gray-700">
-                        <Shield className="w-3 h-3 text-sky-600" />
+                    <td className="py-3.5 px-4">
+                      <span className="inline-flex items-center gap-1.5 text-[#1A1A1A] font-medium">
+                        <Shield className="w-3.5 h-3.5 text-[#6B1A1A]" />
                         {log.resource}
                       </span>
                     </td>
-                    <td className="py-3 px-4 text-gray-600 font-mono text-[11px] max-w-xs truncate">
+                    <td className="py-3.5 px-4 text-[#6B6B6B] font-mono text-[11px] max-w-xs truncate">
                       {JSON.stringify(log.details || {})}
                     </td>
                   </tr>

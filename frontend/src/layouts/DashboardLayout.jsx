@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar.jsx";
 
 const DashboardLayout = () => {
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-[#F0ECEB] flex font-sans">
       {/* Persistent Sidebar */}
       <Sidebar />
 

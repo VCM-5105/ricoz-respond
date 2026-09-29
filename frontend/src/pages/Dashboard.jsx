@@ -31,7 +31,7 @@ const Dashboard = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      // Fetch dynamic stats directly from MongoDB
+      // Fetch dynamic stats directly
       const statsRes = await api.get("/dashboard/stats");
       setStats(statsRes.data);
 
@@ -103,13 +103,13 @@ const Dashboard = () => {
         </div>
 
         {/* Section Header & Filters */}
-        <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-xs">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
+        <div className="bg-white border border-[#E8E0DE] rounded-xl p-5 shadow-xs font-sans">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E8E0DE]">
             <div>
-              <h2 className="text-sm font-bold text-gray-900">
+              <h2 className="font-serif text-base font-bold text-[#1A1A1A]">
                 Recent Incidents
               </h2>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-[#6B6B6B]">
                 Active security cases and investigations
               </p>
             </div>
@@ -117,13 +117,13 @@ const Dashboard = () => {
               <button
                 onClick={fetchData}
                 title="Refresh data"
-                className="p-1.5 border border-gray-200 rounded text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+                className="p-2 border border-[#E8E0DE] rounded-lg text-[#6B6B6B] hover:text-[#1A1A1A] hover:bg-[#F5F1F0] transition-colors"
               >
                 <RefreshCw className="w-4 h-4" />
               </button>
               <Link
                 to="/incidents"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-xs transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#6B1A1A] hover:bg-[#4A1212] text-white text-xs font-medium rounded-lg shadow-xs transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>New Incident</span>
@@ -139,12 +139,12 @@ const Dashboard = () => {
                 placeholder="Search incidents by ID, title, or type..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full text-xs px-3 py-1.5 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-sky-500 focus:bg-white text-gray-800"
+                className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] placeholder-[#9B9B9B] transition-all"
               />
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-400 flex items-center gap-1">
+              <span className="text-xs text-[#6B6B6B] flex items-center gap-1">
                 <Filter className="w-3 h-3" />
                 Filters:
               </span>
@@ -153,7 +153,7 @@ const Dashboard = () => {
               <select
                 value={severityFilter}
                 onChange={(e) => setSeverityFilter(e.target.value)}
-                className="text-xs px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-sky-500 text-gray-700"
+                className="text-xs px-3 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] transition-all"
               >
                 <option value="">All Severities</option>
                 <option value="LOW">Low</option>
@@ -166,7 +166,7 @@ const Dashboard = () => {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="text-xs px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-sky-500 text-gray-700"
+                className="text-xs px-3 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] transition-all"
               >
                 <option value="">All Statuses</option>
                 <option value="OPEN">Open</option>

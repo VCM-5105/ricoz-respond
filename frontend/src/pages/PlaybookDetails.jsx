@@ -60,13 +60,13 @@ const PlaybookDetails = () => {
 
   if (!playbook) {
     return (
-      <div className="p-8">
+      <div className="p-8 font-sans">
         <EmptyState
           title="Playbook Not Found"
           description="The requested playbook could not be found."
         />
         <div className="mt-4 text-center">
-          <Link to="/playbooks" className="text-xs text-sky-600 hover:underline">
+          <Link to="/playbooks" className="text-xs text-[#6B1A1A] hover:underline font-medium">
             Back to Playbooks
           </Link>
         </div>
@@ -75,7 +75,7 @@ const PlaybookDetails = () => {
   }
 
   return (
-    <div>
+    <div className="font-sans">
       <Navbar
         title={playbook.name}
         subtitle="Standard operating procedure configuration"
@@ -85,7 +85,7 @@ const PlaybookDetails = () => {
         <div>
           <Link
             to="/playbooks"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to Playbooks</span>
@@ -93,41 +93,41 @@ const PlaybookDetails = () => {
         </div>
 
         {errorBanner && (
-          <div className="p-3 bg-red-50 border border-red-200 text-xs text-red-700 rounded">
+          <div className="p-3 bg-red-50 border border-red-200 text-xs text-red-700 rounded-lg">
             {errorBanner}
           </div>
         )}
 
         {/* Playbook Overview */}
-        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-xs">
+        <div className="bg-white border border-[#E8E0DE] rounded-xl p-6 shadow-xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[11px] font-mono text-sky-700 bg-sky-50 px-2 py-0.5 rounded font-semibold border border-sky-100">
+            <span className="text-[11px] font-mono text-[#6B1A1A] bg-[#6B1A1A]/10 px-2.5 py-0.5 rounded-full font-semibold border border-[#6B1A1A]/20">
               {playbook.incidentType}
             </span>
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-[#6B6B6B]">
               Created: {new Date(playbook.createdAt).toLocaleDateString()}
             </span>
           </div>
-          <h2 className="text-base font-bold text-gray-900">{playbook.name}</h2>
-          <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+          <h2 className="font-serif text-lg font-bold text-[#1A1A1A]">{playbook.name}</h2>
+          <p className="text-xs text-[#6B6B6B] mt-1 leading-relaxed">
             {playbook.description || "No description provided."}
           </p>
         </div>
 
         {/* Step List Section */}
-        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-xs space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+        <div className="bg-white border border-[#E8E0DE] rounded-xl p-6 shadow-xs space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-[#E8E0DE]">
             <div>
-              <h3 className="text-sm font-bold text-gray-900">
+              <h3 className="font-serif text-base font-bold text-[#1A1A1A]">
                 Action Steps ({playbook.steps?.length || 0})
               </h3>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-[#6B6B6B]">
                 When executed against an incident, each step generates an operational task
               </p>
             </div>
             <button
               onClick={() => setIsStepModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded text-xs font-semibold shadow-xs"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium shadow-xs transition-colors"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Step</span>
@@ -147,15 +147,15 @@ const PlaybookDetails = () => {
               {playbook.steps.map((step, idx) => (
                 <div
                   key={step._id}
-                  className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 border border-gray-100 text-xs"
+                  className="flex items-start gap-4 p-4 rounded-xl bg-[#F5F1F0]/50 border border-[#E8E0DE] text-xs"
                 >
-                  <div className="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-[11px] flex-shrink-0">
+                  <div className="w-6 h-6 rounded-full bg-[#6B1A1A] text-white flex items-center justify-center font-bold text-[11px] flex-shrink-0 font-serif">
                     {step.order || idx + 1}
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-gray-900">{step.title}</h4>
+                    <h4 className="font-semibold text-[#1A1A1A]">{step.title}</h4>
                     {step.description && (
-                      <p className="text-gray-600 mt-1 text-[11px] leading-relaxed">
+                      <p className="text-[#6B6B6B] mt-1 text-[11px] leading-relaxed">
                         {step.description}
                       </p>
                     )}
@@ -173,9 +173,9 @@ const PlaybookDetails = () => {
         onClose={() => setIsStepModalOpen(false)}
         title="Add Playbook Response Step"
       >
-        <form onSubmit={handleAddStep} className="space-y-4">
+        <form onSubmit={handleAddStep} className="space-y-4 font-sans">
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Step Title *
             </label>
             <input
@@ -184,11 +184,11 @@ const PlaybookDetails = () => {
               placeholder="e.g. Block malicious domain in DNS firewall"
               value={stepTitle}
               onChange={(e) => setStepTitle(e.target.value)}
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-sky-500"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Detailed Instructions
             </label>
             <textarea
@@ -196,21 +196,21 @@ const PlaybookDetails = () => {
               placeholder="Operational notes, CLI commands, or validation checks..."
               value={stepDesc}
               onChange={(e) => setStepDesc(e.target.value)}
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-sky-500"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             />
           </div>
-          <div className="flex justify-end gap-2 pt-3 border-t">
+          <div className="flex justify-end gap-2 pt-3 border-t border-[#E8E0DE]">
             <button
               type="button"
               onClick={() => setIsStepModalOpen(false)}
-              className="px-3 py-1.5 border rounded text-xs text-gray-700 hover:bg-gray-50"
+              className="px-3.5 py-1.5 border border-[#E8E0DE] rounded-lg text-xs text-[#1A1A1A] hover:bg-[#F5F1F0]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={actionLoading}
-              className="px-4 py-1.5 bg-sky-600 text-white rounded text-xs font-semibold shadow-xs"
+              className="px-4 py-1.5 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium shadow-xs"
             >
               {actionLoading ? "Saving Step..." : "Save Step"}
             </button>

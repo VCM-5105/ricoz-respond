@@ -9,8 +9,7 @@ import {
   Users,
   History,
   Settings,
-  LogOut,
-  ShieldCheck
+  LogOut
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 
@@ -34,19 +33,24 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="w-64 bg-slate-900 border-r border-slate-800 text-slate-300 flex flex-col h-screen fixed left-0 top-0 select-none z-30">
+    <aside className="w-64 bg-[#1F1717] border-r border-[#342424] text-[#D8CECC] flex flex-col h-screen fixed left-0 top-0 select-none z-30 font-sans">
       {/* Brand Header */}
-      <div className="h-16 flex items-center px-6 border-b border-slate-800">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-md bg-sky-600 flex items-center justify-center text-white shadow-sm">
-            <ShieldCheck className="w-5 h-5" />
+      <div className="h-16 flex items-center px-5 border-b border-[#342424]">
+        <div className="flex items-center gap-3">
+          <div className="logo-box shadow-md">
+            R
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-bold tracking-tight text-white">
-              RicozRespond
-            </span>
-            <span className="text-[10px] text-sky-400 font-mono tracking-widest uppercase">
-              Incident Response
+            <div className="flex items-center gap-1">
+              <span className="font-serif text-base font-bold tracking-tight text-white">
+                Ricoz
+              </span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#C9A96E]">
+                Respond
+              </span>
+            </div>
+            <span className="text-[9px] text-[#A89F9E] tracking-widest uppercase font-semibold">
+              Security Operations
             </span>
           </div>
         </div>
@@ -54,8 +58,8 @@ const Sidebar = () => {
 
       {/* Main Navigation */}
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        <div className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
-          Security Operations
+        <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-[#C9A96E]">
+          Investigation & Response
         </div>
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -64,10 +68,10 @@ const Sidebar = () => {
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium transition-colors ${
+                `flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
                   isActive
-                    ? "bg-sky-600 text-white shadow-sm"
-                    : "text-slate-400 hover:text-white hover:bg-slate-800"
+                    ? "bg-[#6B1A1A] text-white shadow-sm font-semibold"
+                    : "text-[#B5AAA8] hover:text-white hover:bg-[#2F2121]"
                 }`
               }
             >
@@ -79,14 +83,14 @@ const Sidebar = () => {
       </nav>
 
       {/* Bottom Navigation */}
-      <div className="p-3 border-t border-slate-800 space-y-1">
+      <div className="p-3 border-t border-[#342424] space-y-1">
         <NavLink
           to="/settings"
           className={({ isActive }) =>
-            `flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium transition-colors ${
+            `flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
               isActive
-                ? "bg-slate-800 text-white"
-                : "text-slate-400 hover:text-white hover:bg-slate-800"
+                ? "bg-[#6B1A1A] text-white"
+                : "text-[#B5AAA8] hover:text-white hover:bg-[#2F2121]"
             }`
           }
         >
@@ -95,7 +99,7 @@ const Sidebar = () => {
         </NavLink>
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-red-400 hover:text-red-300 hover:bg-red-950/30 transition-colors"
+          className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium text-[#EF4444] hover:text-[#FCA5A5] hover:bg-[#3E1A1A] transition-colors"
         >
           <LogOut className="w-4 h-4" />
           <span>Logout</span>
@@ -103,15 +107,15 @@ const Sidebar = () => {
 
         {/* User Mini Profile */}
         {user && (
-          <div className="pt-2 mt-2 border-t border-slate-800/80 px-2 flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-slate-700 text-slate-200 flex items-center justify-center text-xs font-bold uppercase">
+          <div className="pt-2 mt-2 border-t border-[#342424] px-2 flex items-center gap-2">
+            <div className="w-7 h-7 rounded-md bg-[#6B1A1A] text-[#C9A96E] font-serif flex items-center justify-center text-xs font-bold uppercase shadow-inner">
               {user.name?.charAt(0) || "U"}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-slate-200 truncate">
+              <p className="text-xs font-medium text-white truncate">
                 {user.name}
               </p>
-              <p className="text-[10px] text-slate-400 truncate">
+              <p className="text-[10px] text-[#A89F9E] truncate">
                 {user.role?.name || "Analyst"}
               </p>
             </div>

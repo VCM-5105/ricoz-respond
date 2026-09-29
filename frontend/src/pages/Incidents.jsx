@@ -48,7 +48,7 @@ const Incidents = () => {
 
   const fetchUsers = async () => {
     try {
-      // Load real users strictly from MongoDB
+      // Load users
       const res = await api.get("/users");
       setUsers(res.data || []);
     } catch (err) {
@@ -110,23 +110,23 @@ const Incidents = () => {
 
       <div className="p-8 max-w-7xl mx-auto space-y-6">
         {/* Action Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-gray-200 rounded-lg p-4 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-[#E8E0DE] rounded-xl p-5 shadow-xs font-sans">
           <div className="flex flex-1 items-center gap-3">
             <div className="relative flex-1 max-w-md">
-              <Search className="w-3.5 h-3.5 text-gray-400 absolute left-3 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-[#9B9B9B] absolute left-3.5 top-3" />
               <input
                 type="text"
                 placeholder="Search incidents by title, ID, or description..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full text-xs pl-9 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-sky-500 focus:bg-white text-gray-800"
+                className="w-full text-xs pl-9 pr-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] placeholder-[#9B9B9B] transition-all"
               />
             </div>
 
             <select
               value={severityFilter}
               onChange={(e) => setSeverityFilter(e.target.value)}
-              className="text-xs px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-sky-500 text-gray-700"
+              className="text-xs px-3 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] transition-all"
             >
               <option value="">All Severities</option>
               <option value="LOW">Low</option>
@@ -138,7 +138,7 @@ const Incidents = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="text-xs px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-sky-500 text-gray-700"
+              className="text-xs px-3 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] transition-all"
             >
               <option value="">All Statuses</option>
               <option value="OPEN">Open</option>
@@ -153,13 +153,13 @@ const Incidents = () => {
             <button
               onClick={fetchIncidents}
               title="Refresh"
-              className="p-1.5 border border-gray-200 rounded text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+              className="p-2 border border-[#E8E0DE] rounded-lg text-[#6B6B6B] hover:text-[#1A1A1A] hover:bg-[#F5F1F0] transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
             </button>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-xs transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#6B1A1A] hover:bg-[#4A1212] text-white text-xs font-medium rounded-lg shadow-xs transition-colors"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Create Incident</span>
@@ -187,15 +187,15 @@ const Incidents = () => {
         maxWidth="max-w-xl"
       >
         {formError && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-xs text-red-700 flex items-start gap-2">
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 flex items-start gap-2">
             <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
             <span>{formError}</span>
           </div>
         )}
 
-        <form onSubmit={handleCreateIncident} className="space-y-4">
+        <form onSubmit={handleCreateIncident} className="space-y-4 font-sans">
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Incident Title *
             </label>
             <input
@@ -206,12 +206,12 @@ const Incidents = () => {
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-sky-500"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Description
             </label>
             <textarea
@@ -221,13 +221,13 @@ const Incidents = () => {
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-sky-500"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] transition-all"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
+              <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
                 Incident Type
               </label>
               <input
@@ -237,12 +237,12 @@ const Incidents = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, incidentType: e.target.value })
                 }
-                className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-sky-500"
+                className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] transition-all"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
+              <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
                 Severity
               </label>
               <select
@@ -250,7 +250,7 @@ const Incidents = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, severity: e.target.value })
                 }
-                className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-sky-500 bg-white"
+                className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] transition-all"
               >
                 <option value="LOW">LOW</option>
                 <option value="MEDIUM">MEDIUM</option>
@@ -262,7 +262,7 @@ const Incidents = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
+              <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
                 Initial Status
               </label>
               <select
@@ -270,7 +270,7 @@ const Incidents = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, status: e.target.value })
                 }
-                className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-sky-500 bg-white"
+                className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] transition-all"
               >
                 <option value="OPEN">OPEN</option>
                 <option value="INVESTIGATING">INVESTIGATING</option>
@@ -281,7 +281,7 @@ const Incidents = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
+              <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
                 Assign Analyst
               </label>
               <select
@@ -289,7 +289,7 @@ const Incidents = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, assignedTo: e.target.value })
                 }
-                className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-sky-500 bg-white"
+                className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A] transition-all"
               >
                 <option value="">-- Unassigned --</option>
                 {users.map((u) => (
@@ -301,18 +301,18 @@ const Incidents = () => {
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-4 border-t border-gray-100">
+          <div className="flex justify-end gap-2 pt-4 border-t border-[#E8E0DE]">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="px-3 py-1.5 border border-gray-300 rounded text-xs font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 border border-[#E8E0DE] rounded-lg text-xs font-medium text-[#1A1A1A] hover:bg-[#F5F1F0] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={formLoading}
-              className="px-4 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded text-xs font-semibold shadow-xs disabled:opacity-50 transition-colors"
+              className="px-4 py-2 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium shadow-xs disabled:opacity-50 transition-colors"
             >
               {formLoading ? "Creating Incident..." : "Create Incident"}
             </button>

@@ -262,7 +262,7 @@ const IncidentDetails = () => {
     try {
       setActionLoading(true);
       await api.post(`/playbooks/${playbookId}/execute`, { incidentId: id });
-      setSuccessBanner("Playbook executed! Real tasks created in database.");
+      setSuccessBanner("Playbook executed! Real response tasks created successfully.");
       fetchTasks();
       fetchTimeline();
       setActiveTab("tasks");
@@ -279,13 +279,13 @@ const IncidentDetails = () => {
 
   if (!incident) {
     return (
-      <div className="p-8">
+      <div className="p-8 font-sans">
         <EmptyState
           title="Incident Not Found"
           description="The requested incident could not be found."
         />
         <div className="mt-4 text-center">
-          <Link to="/incidents" className="text-xs text-sky-600 hover:underline">
+          <Link to="/incidents" className="text-xs text-[#6B1A1A] hover:underline font-medium">
             Back to Incidents
           </Link>
         </div>
@@ -294,7 +294,7 @@ const IncidentDetails = () => {
   }
 
   return (
-    <div>
+    <div className="font-sans">
       <Navbar
         title={`Incident ${incident.incidentId || incident._id.substring(0, 8)}`}
         subtitle="Detailed case investigation workspace"
@@ -305,7 +305,7 @@ const IncidentDetails = () => {
         <div>
           <Link
             to="/incidents"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to Incidents</span>
@@ -314,38 +314,38 @@ const IncidentDetails = () => {
 
         {/* Notifications Banners */}
         {errorBanner && (
-          <div className="p-3 bg-red-50 border border-red-200 text-xs text-red-700 rounded flex items-center justify-between">
+          <div className="p-3 bg-red-50 border border-red-200 text-xs text-red-700 rounded-lg flex items-center justify-between">
             <span>{errorBanner}</span>
             <button onClick={() => setErrorBanner("")} className="font-bold ml-2">×</button>
           </div>
         )}
         {successBanner && (
-          <div className="p-3 bg-emerald-50 border border-emerald-200 text-xs text-emerald-700 rounded flex items-center justify-between">
+          <div className="p-3 bg-emerald-50 border border-emerald-200 text-xs text-emerald-700 rounded-lg flex items-center justify-between">
             <span>{successBanner}</span>
             <button onClick={() => setSuccessBanner("")} className="font-bold ml-2">×</button>
           </div>
         )}
 
         {/* Incident Header Card */}
-        <div className="bg-white border border-gray-200 rounded-lg p-5 shadow-xs">
+        <div className="bg-white border border-[#E8E0DE] rounded-xl p-6 shadow-xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="font-mono text-xs font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">
+                <span className="font-mono text-xs font-bold text-[#6B1A1A] bg-[#6B1A1A]/10 px-2.5 py-0.5 rounded-md border border-[#6B1A1A]/20">
                   {incident.incidentId || incident._id}
                 </span>
-                <span className="text-xs text-gray-400 font-medium">
+                <span className="text-xs text-[#6B6B6B] font-medium">
                   {incident.incidentType}
                 </span>
               </div>
-              <h2 className="text-lg font-bold text-gray-900">{incident.title}</h2>
+              <h2 className="font-serif text-xl font-bold text-[#1A1A1A]">{incident.title}</h2>
               <div className="flex items-center gap-3 mt-3">
                 <SeverityBadge severity={incident.severity} />
                 <StatusBadge status={incident.status} />
-                <span className="text-xs text-gray-500 flex items-center gap-1.5 pl-2 border-l border-gray-200">
-                  <UserCheck className="w-3.5 h-3.5 text-gray-400" />
+                <span className="text-xs text-[#6B6B6B] flex items-center gap-1.5 pl-2 border-l border-[#E8E0DE]">
+                  <UserCheck className="w-3.5 h-3.5 text-[#9B9B9B]" />
                   Assigned:{" "}
-                  <strong className="text-gray-700 font-medium">
+                  <strong className="text-[#1A1A1A] font-medium">
                     {incident.assignedTo?.name || "Unassigned"}
                   </strong>
                 </span>
@@ -356,21 +356,21 @@ const IncidentDetails = () => {
             <div className="flex items-center gap-2 self-start md:self-auto">
               <button
                 onClick={() => setIsEditModalOpen(true)}
-                className="inline-flex items-center gap-1 px-3 py-1.5 border border-gray-200 rounded text-xs font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#E8E0DE] rounded-lg text-xs font-medium text-[#1A1A1A] hover:bg-[#F5F1F0] transition-colors"
               >
-                <Edit2 className="w-3 h-3 text-gray-500" />
+                <Edit2 className="w-3 h-3 text-[#6B6B6B]" />
                 <span>Edit</span>
               </button>
               <button
                 onClick={() => setIsStatusModalOpen(true)}
-                className="inline-flex items-center gap-1 px-3 py-1.5 border border-gray-200 rounded text-xs font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#E8E0DE] rounded-lg text-xs font-medium text-[#1A1A1A] hover:bg-[#F5F1F0] transition-colors"
               >
-                <CheckCircle className="w-3 h-3 text-gray-500" />
+                <CheckCircle className="w-3 h-3 text-[#6B6B6B]" />
                 <span>Change Status</span>
               </button>
               <button
                 onClick={() => setIsAssignModalOpen(true)}
-                className="inline-flex items-center gap-1 px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded text-xs font-semibold shadow-xs transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium shadow-xs transition-colors"
               >
                 <UserCheck className="w-3.5 h-3.5" />
                 <span>Assign</span>
@@ -380,7 +380,7 @@ const IncidentDetails = () => {
         </div>
 
         {/* 5 Investigation Tabs */}
-        <div className="border-b border-gray-200 bg-white rounded-t-lg px-4 pt-1 shadow-xs">
+        <div className="border-b border-[#E8E0DE] bg-white rounded-t-xl px-4 pt-1 shadow-xs">
           <div className="flex space-x-6 text-xs font-semibold">
             {[
               { id: "overview", label: "Overview", icon: FileText },
@@ -397,8 +397,8 @@ const IncidentDetails = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-2 py-3 border-b-2 font-medium transition-colors ${
                     isActive
-                      ? "border-sky-600 text-sky-600"
-                      : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      ? "border-[#6B1A1A] text-[#6B1A1A] font-semibold"
+                      : "border-transparent text-[#6B6B6B] hover:text-[#1A1A1A] hover:border-[#E8E0DE]"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -478,21 +478,21 @@ const IncidentDetails = () => {
         {activeTab === "tasks" && (
           <div className="bg-white border border-gray-200 rounded-b-lg p-6 space-y-6 shadow-xs">
             {/* Header + Dynamic Stats */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E8E0DE]">
               <div>
-                <h3 className="text-sm font-bold text-gray-900">Incident Tasks</h3>
-                <p className="text-xs text-gray-500 mt-0.5">
+                <h3 className="font-serif text-base font-bold text-[#1A1A1A]">Incident Tasks</h3>
+                <p className="text-xs text-[#6B6B6B] mt-0.5">
                   Completed tasks:{" "}
-                  <strong className="text-emerald-600">
+                  <strong className="text-emerald-600 font-semibold">
                     {taskStats.completedTasks}
                   </strong>{" "}
                   / Total tasks:{" "}
-                  <strong className="text-gray-800">{taskStats.totalTasks}</strong>
+                  <strong className="text-[#1A1A1A] font-semibold">{taskStats.totalTasks}</strong>
                 </p>
               </div>
               <button
                 onClick={() => setIsTaskModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded text-xs font-semibold shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium shadow-xs transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Create Task</span>
@@ -509,31 +509,31 @@ const IncidentDetails = () => {
                 onAction={() => setIsTaskModalOpen(true)}
               />
             ) : (
-              <div className="divide-y divide-gray-100 border border-gray-200 rounded-lg">
+              <div className="divide-y divide-[#E8E0DE] border border-[#E8E0DE] rounded-xl overflow-hidden bg-white">
                 {tasks.map((task) => (
                   <div
                     key={task._id}
-                    className="p-3.5 flex items-center justify-between hover:bg-gray-50/70 transition-colors"
+                    className="p-3.5 flex items-center justify-between hover:bg-[#F5F1F0]/50 transition-colors"
                   >
                     <div className="flex items-center gap-3">
                       <input
                         type="checkbox"
                         checked={task.status === "COMPLETED"}
                         onChange={() => handleToggleTaskStatus(task)}
-                        className="w-4 h-4 text-sky-600 rounded border-gray-300 focus:ring-sky-500 cursor-pointer"
+                        className="w-4 h-4 text-[#6B1A1A] accent-[#6B1A1A] rounded border-[#E8E0DE] focus:ring-[#6B1A1A] cursor-pointer"
                       />
                       <div>
                         <span
                           className={`text-xs font-semibold ${
                             task.status === "COMPLETED"
-                              ? "line-through text-gray-400"
-                              : "text-gray-900"
+                              ? "line-through text-[#9B9B9B]"
+                              : "text-[#1A1A1A]"
                           }`}
                         >
                           {task.title}
                         </span>
                         {task.description && (
-                          <p className="text-[11px] text-gray-500 mt-0.5">
+                          <p className="text-[11px] text-[#6B6B6B] mt-0.5">
                             {task.description}
                           </p>
                         )}
@@ -541,12 +541,12 @@ const IncidentDetails = () => {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="text-[11px] text-gray-500 bg-gray-100 px-2 py-0.5 rounded font-medium">
+                      <span className="text-[11px] text-[#6B6B6B] bg-[#F5F1F0] px-2.5 py-1 rounded-md font-medium border border-[#E8E0DE]">
                         {task.assignedTo?.name || "Unassigned"}
                       </span>
                       <button
                         onClick={() => handleDeleteTask(task._id)}
-                        className="text-gray-400 hover:text-red-600 p-1 transition-colors"
+                        className="text-[#9B9B9B] hover:text-red-600 p-1 transition-colors"
                         title="Delete Task"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -561,17 +561,17 @@ const IncidentDetails = () => {
 
         {/* TAB 3: EVIDENCE */}
         {activeTab === "evidence" && (
-          <div className="bg-white border border-gray-200 rounded-b-lg p-6 space-y-6 shadow-xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
+          <div className="bg-white border border-[#E8E0DE] rounded-b-xl p-6 space-y-6 shadow-xs font-sans">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E8E0DE]">
               <div>
-                <h3 className="text-sm font-bold text-gray-900">Collected Evidence</h3>
-                <p className="text-xs text-gray-500">
-                  Forensic artifacts, PCAP captures, memory dumps, and logs stored via Multer
+                <h3 className="font-serif text-base font-bold text-[#1A1A1A]">Collected Evidence</h3>
+                <p className="text-xs text-[#6B6B6B]">
+                  Forensic artifacts, PCAP captures, memory dumps, and logs stored securely
                 </p>
               </div>
               <button
                 onClick={() => setIsEvidenceModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded text-xs font-semibold shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium shadow-xs transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Upload Evidence</span>
@@ -588,21 +588,21 @@ const IncidentDetails = () => {
                 onAction={() => setIsEvidenceModalOpen(true)}
               />
             ) : (
-              <div className="divide-y divide-gray-100 border border-gray-200 rounded-lg">
+              <div className="divide-y divide-[#E8E0DE] border border-[#E8E0DE] rounded-xl overflow-hidden bg-white">
                 {evidenceList.map((ev) => (
                   <div
                     key={ev._id}
-                    className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors text-xs"
+                    className="p-4 flex items-center justify-between hover:bg-[#F5F1F0]/50 transition-colors text-xs"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-sky-50 text-sky-600 rounded">
+                      <div className="p-2 bg-[#6B1A1A]/10 text-[#6B1A1A] rounded-lg">
                         <FileText className="w-4 h-4" />
                       </div>
                       <div>
-                        <span className="font-semibold text-gray-900 block">
+                        <span className="font-semibold text-[#1A1A1A] block">
                           {ev.originalName}
                         </span>
-                        <span className="text-[11px] text-gray-400 block mt-0.5">
+                        <span className="text-[11px] text-[#6B6B6B] block mt-0.5">
                           {ev.description || "No description"} • Uploaded by{" "}
                           <strong>{ev.uploadedBy?.name || "Analyst"}</strong> on{" "}
                           {new Date(ev.createdAt).toLocaleDateString()}
@@ -614,9 +614,9 @@ const IncidentDetails = () => {
                       href={`http://localhost:5000/api/evidence/download/${ev._id}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1 px-2.5 py-1 border border-gray-200 rounded text-gray-600 hover:bg-gray-50 font-medium transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#E8E0DE] rounded-lg text-[#1A1A1A] hover:bg-[#F5F1F0] font-medium transition-colors"
                     >
-                      <Download className="w-3 h-3" />
+                      <Download className="w-3.5 h-3.5" />
                       <span>Download</span>
                     </a>
                   </div>
@@ -628,10 +628,10 @@ const IncidentDetails = () => {
 
         {/* TAB 4: TIMELINE */}
         {activeTab === "timeline" && (
-          <div className="bg-white border border-gray-200 rounded-b-lg p-6 space-y-6 shadow-xs">
-            <div className="pb-4 border-b border-gray-100">
-              <h3 className="text-sm font-bold text-gray-900">Incident Audit Timeline</h3>
-              <p className="text-xs text-gray-500">
+          <div className="bg-white border border-[#E8E0DE] rounded-b-xl p-6 space-y-6 shadow-xs font-sans">
+            <div className="pb-4 border-b border-[#E8E0DE]">
+              <h3 className="font-serif text-base font-bold text-[#1A1A1A]">Incident Audit Timeline</h3>
+              <p className="text-xs text-[#6B6B6B]">
                 Chronological record of all investigation activities
               </p>
             </div>
@@ -644,21 +644,21 @@ const IncidentDetails = () => {
                 description="Actions taken on this incident will automatically appear here."
               />
             ) : (
-              <div className="relative pl-6 space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-200">
+              <div className="relative pl-6 space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#E8E0DE]">
                 {timeline.map((entry) => (
                   <div key={entry._id} className="relative flex items-start gap-3">
-                    <div className="absolute -left-[29px] top-1 w-3 h-3 rounded-full bg-sky-600 ring-4 ring-white" />
-                    <div className="flex-1 bg-gray-50 border border-gray-100 p-3 rounded text-xs">
+                    <div className="absolute -left-[29px] top-1 w-3 h-3 rounded-full bg-[#6B1A1A] ring-4 ring-white" />
+                    <div className="flex-1 bg-[#F5F1F0] border border-[#E8E0DE] p-3 rounded-lg text-xs">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-semibold text-gray-800">
+                        <span className="font-semibold text-[#1A1A1A]">
                           {entry.action}
                         </span>
-                        <span className="text-[10px] text-gray-400">
+                        <span className="text-[10px] text-[#9B9B9B]">
                           {new Date(entry.createdAt).toLocaleString()}
                         </span>
                       </div>
-                      <p className="text-gray-600 text-[11px]">{entry.description}</p>
-                      <span className="text-[10px] text-sky-700 font-medium mt-1 block">
+                      <p className="text-[#6B6B6B] text-[11px]">{entry.description}</p>
+                      <span className="text-[10px] text-[#6B1A1A] font-medium mt-1 block">
                         Logged by: {entry.userId?.name || "System"}
                       </span>
                     </div>
@@ -671,17 +671,17 @@ const IncidentDetails = () => {
 
         {/* TAB 5: PLAYBOOK */}
         {activeTab === "playbook" && (
-          <div className="bg-white border border-gray-200 rounded-b-lg p-6 space-y-6 shadow-xs">
-            <div className="pb-4 border-b border-gray-100 flex items-center justify-between">
+          <div className="bg-white border border-[#E8E0DE] rounded-b-xl p-6 space-y-6 shadow-xs font-sans">
+            <div className="pb-4 border-b border-[#E8E0DE] flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-bold text-gray-900">Response Playbooks</h3>
-                <p className="text-xs text-gray-500">
+                <h3 className="font-serif text-base font-bold text-[#1A1A1A]">Response Playbooks</h3>
+                <p className="text-xs text-[#6B6B6B]">
                   Execute pre-configured response playbooks to auto-generate tasks and audit logs
                 </p>
               </div>
               <Link
                 to="/playbooks"
-                className="text-xs text-sky-600 hover:underline font-semibold"
+                className="text-xs text-[#6B1A1A] hover:underline font-semibold"
               >
                 Manage Playbooks
               </Link>
@@ -691,25 +691,25 @@ const IncidentDetails = () => {
               <EmptyState
                 icon={BookOpen}
                 title="No playbooks available"
-                description="No response playbooks exist in the database yet. Create one to run simulated response workflows."
+                description="No response playbooks are available yet. Create one to run simulated response workflows."
               />
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {playbooks.map((pb) => (
                   <div
                     key={pb._id}
-                    className="border border-gray-200 rounded-lg p-4 hover:border-sky-300 transition-all flex flex-col justify-between"
+                    className="border border-[#E8E0DE] rounded-xl p-5 hover:border-[#6B1A1A] transition-all flex flex-col justify-between bg-white shadow-xs"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-bold text-gray-900">
+                        <span className="text-xs font-bold text-[#1A1A1A]">
                           {pb.name}
                         </span>
-                        <span className="text-[10px] bg-sky-50 text-sky-700 px-2 py-0.5 rounded font-mono font-medium">
+                        <span className="text-[10px] bg-[#6B1A1A]/10 text-[#6B1A1A] px-2.5 py-0.5 rounded-full font-mono font-medium border border-[#6B1A1A]/20">
                           {pb.incidentType}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-500 mb-3">
+                      <p className="text-xs text-[#6B6B6B] mb-4">
                         {pb.description || "Automated response playbook workflow."}
                       </p>
                     </div>
@@ -717,7 +717,7 @@ const IncidentDetails = () => {
                     <button
                       onClick={() => handleExecutePlaybook(pb._id)}
                       disabled={actionLoading}
-                      className="inline-flex items-center justify-center gap-1.5 w-full py-2 bg-sky-600 hover:bg-sky-700 text-white rounded text-xs font-semibold shadow-xs disabled:opacity-50 transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 w-full py-2 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium shadow-xs disabled:opacity-50 transition-colors"
                     >
                       <Play className="w-3.5 h-3.5" />
                       <span>Run Playbook</span>
@@ -738,7 +738,7 @@ const IncidentDetails = () => {
       >
         <form onSubmit={handleUpdateIncident} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Title
             </label>
             <input
@@ -746,11 +746,11 @@ const IncidentDetails = () => {
               required
               value={editForm.title}
               onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-sky-500"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Description
             </label>
             <textarea
@@ -759,12 +759,12 @@ const IncidentDetails = () => {
               onChange={(e) =>
                 setEditForm({ ...editForm, description: e.target.value })
               }
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-sky-500"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
+              <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
                 Incident Type
               </label>
               <input
@@ -773,11 +773,11 @@ const IncidentDetails = () => {
                 onChange={(e) =>
                   setEditForm({ ...editForm, incidentType: e.target.value })
                 }
-                className="w-full text-xs px-3 py-2 border border-gray-300 rounded"
+                className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
+              <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
                 Severity
               </label>
               <select
@@ -785,7 +785,7 @@ const IncidentDetails = () => {
                 onChange={(e) =>
                   setEditForm({ ...editForm, severity: e.target.value })
                 }
-                className="w-full text-xs px-3 py-2 border border-gray-300 rounded bg-white"
+                className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
               >
                 <option value="LOW">LOW</option>
                 <option value="MEDIUM">MEDIUM</option>
@@ -794,18 +794,18 @@ const IncidentDetails = () => {
               </select>
             </div>
           </div>
-          <div className="flex justify-end gap-2 pt-3 border-t">
+          <div className="flex justify-end gap-2 pt-3 border-t border-[#E8E0DE]">
             <button
               type="button"
               onClick={() => setIsEditModalOpen(false)}
-              className="px-3 py-1.5 border rounded text-xs"
+              className="px-3.5 py-1.5 border border-[#E8E0DE] rounded-lg text-xs font-medium text-[#1A1A1A] hover:bg-[#F5F1F0]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={actionLoading}
-              className="px-4 py-1.5 bg-sky-600 text-white rounded text-xs font-semibold"
+              className="px-4 py-1.5 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium"
             >
               Save Changes
             </button>
@@ -821,13 +821,13 @@ const IncidentDetails = () => {
       >
         <form onSubmit={handleChangeStatus} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Select Lifecycle Status
             </label>
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded bg-white"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             >
               <option value="OPEN">OPEN</option>
               <option value="INVESTIGATING">INVESTIGATING</option>
@@ -836,18 +836,18 @@ const IncidentDetails = () => {
               <option value="CLOSED">CLOSED</option>
             </select>
           </div>
-          <div className="flex justify-end gap-2 pt-3 border-t">
+          <div className="flex justify-end gap-2 pt-3 border-t border-[#E8E0DE]">
             <button
               type="button"
               onClick={() => setIsStatusModalOpen(false)}
-              className="px-3 py-1.5 border rounded text-xs"
+              className="px-3.5 py-1.5 border border-[#E8E0DE] rounded-lg text-xs font-medium text-[#1A1A1A] hover:bg-[#F5F1F0]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={actionLoading}
-              className="px-4 py-1.5 bg-sky-600 text-white rounded text-xs font-semibold"
+              className="px-4 py-1.5 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium"
             >
               Update Status
             </button>
@@ -863,13 +863,13 @@ const IncidentDetails = () => {
       >
         <form onSubmit={handleAssignAnalyst} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Assign Analyst
             </label>
             <select
               value={selectedAnalyst}
               onChange={(e) => setSelectedAnalyst(e.target.value)}
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded bg-white"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             >
               <option value="">-- Unassigned --</option>
               {users.map((u) => (
@@ -879,18 +879,18 @@ const IncidentDetails = () => {
               ))}
             </select>
           </div>
-          <div className="flex justify-end gap-2 pt-3 border-t">
+          <div className="flex justify-end gap-2 pt-3 border-t border-[#E8E0DE]">
             <button
               type="button"
               onClick={() => setIsAssignModalOpen(false)}
-              className="px-3 py-1.5 border rounded text-xs"
+              className="px-3.5 py-1.5 border border-[#E8E0DE] rounded-lg text-xs font-medium text-[#1A1A1A] hover:bg-[#F5F1F0]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={actionLoading}
-              className="px-4 py-1.5 bg-sky-600 text-white rounded text-xs font-semibold"
+              className="px-4 py-1.5 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium"
             >
               Save Assignment
             </button>
@@ -906,7 +906,7 @@ const IncidentDetails = () => {
       >
         <form onSubmit={handleCreateTask} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Task Title *
             </label>
             <input
@@ -917,11 +917,11 @@ const IncidentDetails = () => {
               onChange={(e) =>
                 setTaskForm({ ...taskForm, title: e.target.value })
               }
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Task Description
             </label>
             <textarea
@@ -930,11 +930,11 @@ const IncidentDetails = () => {
               onChange={(e) =>
                 setTaskForm({ ...taskForm, description: e.target.value })
               }
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Assign Task To
             </label>
             <select
@@ -942,7 +942,7 @@ const IncidentDetails = () => {
               onChange={(e) =>
                 setTaskForm({ ...taskForm, assignedTo: e.target.value })
               }
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded bg-white"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             >
               <option value="">-- Unassigned --</option>
               {users.map((u) => (
@@ -952,18 +952,18 @@ const IncidentDetails = () => {
               ))}
             </select>
           </div>
-          <div className="flex justify-end gap-2 pt-3 border-t">
+          <div className="flex justify-end gap-2 pt-3 border-t border-[#E8E0DE]">
             <button
               type="button"
               onClick={() => setIsTaskModalOpen(false)}
-              className="px-3 py-1.5 border rounded text-xs"
+              className="px-3.5 py-1.5 border border-[#E8E0DE] rounded-lg text-xs font-medium text-[#1A1A1A] hover:bg-[#F5F1F0]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={actionLoading}
-              className="px-4 py-1.5 bg-sky-600 text-white rounded text-xs font-semibold"
+              className="px-4 py-1.5 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium"
             >
               Add Task
             </button>
@@ -979,18 +979,18 @@ const IncidentDetails = () => {
       >
         <form onSubmit={handleUploadEvidence} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Select Evidence File *
             </label>
             <input
               type="file"
               required
               onChange={(e) => setEvidenceFile(e.target.files[0])}
-              className="w-full text-xs p-1.5 border border-gray-300 rounded bg-gray-50"
+              className="w-full text-xs p-2 border border-[#E8E0DE] rounded-lg bg-[#F5F1F0] text-[#1A1A1A]"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               File Description
             </label>
             <textarea
@@ -998,21 +998,21 @@ const IncidentDetails = () => {
               placeholder="e.g. Wireshark PCAP from core switch interface..."
               value={evidenceDesc}
               onChange={(e) => setEvidenceDesc(e.target.value)}
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             />
           </div>
-          <div className="flex justify-end gap-2 pt-3 border-t">
+          <div className="flex justify-end gap-2 pt-3 border-t border-[#E8E0DE]">
             <button
               type="button"
               onClick={() => setIsEvidenceModalOpen(false)}
-              className="px-3 py-1.5 border rounded text-xs"
+              className="px-3.5 py-1.5 border border-[#E8E0DE] rounded-lg text-xs font-medium text-[#1A1A1A] hover:bg-[#F5F1F0]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={actionLoading}
-              className="px-4 py-1.5 bg-sky-600 text-white rounded text-xs font-semibold"
+              className="px-4 py-1.5 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium"
             >
               {actionLoading ? "Uploading..." : "Upload Evidence"}
             </button>

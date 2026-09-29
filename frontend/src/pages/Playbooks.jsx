@@ -85,7 +85,7 @@ const Playbooks = () => {
   };
 
   return (
-    <div>
+    <div className="font-sans">
       <Navbar
         title="Incident Response Playbooks"
         subtitle="Standard operating procedures and automated response templates"
@@ -93,12 +93,12 @@ const Playbooks = () => {
 
       <div className="p-8 max-w-7xl mx-auto space-y-6">
         {/* Header Actions */}
-        <div className="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-4 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-[#E8E0DE] rounded-xl p-5 shadow-xs">
           <div>
-            <h2 className="text-sm font-bold text-gray-900">
+            <h2 className="font-serif text-base font-bold text-[#1A1A1A]">
               Response Playbooks
             </h2>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-[#6B6B6B]">
               Standardized response playbooks and workflows
             </p>
           </div>
@@ -107,13 +107,13 @@ const Playbooks = () => {
             <button
               onClick={fetchPlaybooks}
               title="Refresh"
-              className="p-1.5 border border-gray-200 rounded text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+              className="p-2 border border-[#E8E0DE] rounded-lg text-[#6B6B6B] hover:text-[#1A1A1A] hover:bg-[#F5F1F0] transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
             </button>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded text-xs font-semibold shadow-xs transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium shadow-xs transition-colors"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Create Playbook</span>
@@ -137,30 +137,30 @@ const Playbooks = () => {
             {playbooks.map((pb) => (
               <div
                 key={pb._id}
-                className="bg-white border border-gray-200 rounded-lg p-5 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between"
+                className="bg-white border border-[#E8E0DE] rounded-xl p-5 shadow-xs hover:border-[#6B1A1A] hover:shadow-sm transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold text-gray-900 line-clamp-1">
+                    <span className="font-serif text-sm font-bold text-[#1A1A1A] line-clamp-1">
                       {pb.name}
                     </span>
-                    <span className="text-[10px] bg-sky-50 text-sky-700 font-mono px-2 py-0.5 rounded font-medium border border-sky-100">
+                    <span className="text-[10px] bg-[#6B1A1A]/10 text-[#6B1A1A] font-mono px-2.5 py-0.5 rounded-full font-medium border border-[#6B1A1A]/20">
                       {pb.incidentType}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-500 mb-4 line-clamp-2">
+                  <p className="text-xs text-[#6B6B6B] mb-4 line-clamp-2">
                     {pb.description || "No description provided."}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
-                  <span className="text-gray-400 flex items-center gap-1 text-[11px]">
-                    <ListOrdered className="w-3.5 h-3.5" />
+                <div className="pt-3 border-t border-[#E8E0DE] flex items-center justify-between text-xs">
+                  <span className="text-[#6B6B6B] flex items-center gap-1.5 text-[11px]">
+                    <ListOrdered className="w-3.5 h-3.5 text-[#9B9B9B]" />
                     {pb.stepCount || 0} response step(s)
                   </span>
                   <Link
                     to={`/playbooks/${pb._id}`}
-                    className="inline-flex items-center gap-1 text-sky-600 font-semibold hover:underline"
+                    className="inline-flex items-center gap-1 text-[#6B1A1A] font-semibold hover:underline"
                   >
                     <span>View Steps</span>
                     <ArrowRight className="w-3 h-3" />
@@ -180,15 +180,15 @@ const Playbooks = () => {
         maxWidth="max-w-xl"
       >
         {formError && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-xs text-red-700 flex items-start gap-2">
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 flex items-start gap-2">
             <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
             <span>{formError}</span>
           </div>
         )}
 
-        <form onSubmit={handleCreatePlaybook} className="space-y-4">
+        <form onSubmit={handleCreatePlaybook} className="space-y-4 font-sans">
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
               Playbook Name *
             </label>
             <input
@@ -199,13 +199,13 @@ const Playbooks = () => {
               onChange={(e) =>
                 setNewPlaybook({ ...newPlaybook, name: e.target.value })
               }
-              className="w-full text-xs px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-sky-500"
+              className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
+              <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
                 Target Incident Type
               </label>
               <input
@@ -218,11 +218,11 @@ const Playbooks = () => {
                     incidentType: e.target.value
                   })
                 }
-                className="w-full text-xs px-3 py-2 border border-gray-300 rounded"
+                className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
+              <label className="block text-xs font-semibold text-[#1A1A1A] mb-1">
                 Brief Description
               </label>
               <input
@@ -235,20 +235,20 @@ const Playbooks = () => {
                     description: e.target.value
                   })
                 }
-                className="w-full text-xs px-3 py-2 border border-gray-300 rounded"
+                className="w-full text-xs px-3.5 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white text-[#1A1A1A]"
               />
             </div>
           </div>
 
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="block text-xs font-semibold text-gray-700">
+              <label className="block text-xs font-semibold text-[#1A1A1A]">
                 Action Steps (Turned into real tasks upon execution)
               </label>
               <button
                 type="button"
                 onClick={handleAddStepField}
-                className="text-xs text-sky-600 hover:underline font-semibold"
+                className="text-xs text-[#6B1A1A] hover:underline font-semibold"
               >
                 + Add Step
               </button>
@@ -258,10 +258,10 @@ const Playbooks = () => {
               {newPlaybook.steps.map((step, idx) => (
                 <div
                   key={idx}
-                  className="p-2.5 bg-gray-50 border border-gray-200 rounded space-y-1.5"
+                  className="p-3 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg space-y-1.5"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-gray-400 font-bold">
+                    <span className="text-[10px] font-mono text-[#6B1A1A] font-bold">
                       #{idx + 1}
                     </span>
                     <input
@@ -271,7 +271,7 @@ const Playbooks = () => {
                       onChange={(e) =>
                         handleStepChange(idx, "title", e.target.value)
                       }
-                      className="w-full text-xs px-2 py-1 bg-white border border-gray-300 rounded"
+                      className="w-full text-xs px-2.5 py-1.5 bg-white border border-[#E8E0DE] rounded-md focus:outline-none focus:border-[#6B1A1A]"
                     />
                   </div>
                   <input
@@ -281,25 +281,25 @@ const Playbooks = () => {
                     onChange={(e) =>
                       handleStepChange(idx, "description", e.target.value)
                     }
-                    className="w-full text-xs px-2 py-1 bg-white border border-gray-300 rounded"
+                    className="w-full text-xs px-2.5 py-1.5 bg-white border border-[#E8E0DE] rounded-md focus:outline-none focus:border-[#6B1A1A]"
                   />
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-4 border-t border-gray-100">
+          <div className="flex justify-end gap-2 pt-4 border-t border-[#E8E0DE]">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="px-3 py-1.5 border border-gray-300 rounded text-xs font-medium text-gray-700 hover:bg-gray-50"
+              className="px-3.5 py-2 border border-[#E8E0DE] rounded-lg text-xs font-medium text-[#1A1A1A] hover:bg-[#F5F1F0]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={formLoading}
-              className="px-4 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded text-xs font-semibold shadow-xs disabled:opacity-50"
+              className="px-4 py-2 bg-[#6B1A1A] hover:bg-[#4A1212] text-white rounded-lg text-xs font-medium shadow-xs disabled:opacity-50"
             >
               {formLoading ? "Saving Playbook..." : "Save Playbook"}
             </button>

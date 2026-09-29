@@ -40,7 +40,7 @@ const Tasks = () => {
   };
 
   return (
-    <div>
+    <div className="font-sans">
       <Navbar
         title="Security Tasks"
         subtitle="Cross-incident operational task management"
@@ -48,16 +48,16 @@ const Tasks = () => {
 
       <div className="p-8 max-w-7xl mx-auto space-y-6">
         {/* Controls */}
-        <div className="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-4 shadow-xs">
+        <div className="flex items-center justify-between bg-white border border-[#E8E0DE] rounded-xl p-5 shadow-xs">
           <div className="flex items-center gap-3">
-            <span className="text-xs text-gray-400 flex items-center gap-1">
-              <Filter className="w-3.5 h-3.5" />
+            <span className="text-xs text-[#6B6B6B] flex items-center gap-1.5">
+              <Filter className="w-3.5 h-3.5 text-[#9B9B9B]" />
               Status:
             </span>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="text-xs px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded text-gray-700 focus:outline-none focus:ring-1 focus:ring-sky-500"
+              className="text-xs px-3 py-2 bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg text-[#1A1A1A] focus:outline-none focus:border-[#6B1A1A]"
             >
               <option value="">All Tasks</option>
               <option value="TODO">To Do</option>
@@ -69,7 +69,7 @@ const Tasks = () => {
           <button
             onClick={fetchTasks}
             title="Refresh"
-            className="p-1.5 border border-gray-200 rounded text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+            className="p-2 border border-[#E8E0DE] rounded-lg text-[#6B6B6B] hover:text-[#1A1A1A] hover:bg-[#F5F1F0] transition-colors"
           >
             <RefreshCw className="w-4 h-4" />
           </button>
@@ -85,31 +85,31 @@ const Tasks = () => {
             description="There are currently no tasks matching the criteria."
           />
         ) : (
-          <div className="bg-white border border-gray-200 rounded-lg divide-y divide-gray-100 shadow-xs">
+          <div className="bg-white border border-[#E8E0DE] rounded-xl divide-y divide-[#E8E0DE] overflow-hidden shadow-xs">
             {tasks.map((task) => (
               <div
                 key={task._id}
-                className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors text-xs"
+                className="p-4 flex items-center justify-between hover:bg-[#F5F1F0]/50 transition-colors text-xs"
               >
                 <div className="flex items-center gap-3">
                   <input
                     type="checkbox"
                     checked={task.status === "COMPLETED"}
                     onChange={() => handleToggleTaskStatus(task)}
-                    className="w-4 h-4 text-sky-600 rounded border-gray-300 focus:ring-sky-500 cursor-pointer"
+                    className="w-4 h-4 text-[#6B1A1A] accent-[#6B1A1A] rounded border-[#E8E0DE] focus:ring-[#6B1A1A] cursor-pointer"
                   />
                   <div>
                     <span
                       className={`font-semibold ${
                         task.status === "COMPLETED"
-                          ? "line-through text-gray-400"
-                          : "text-gray-900"
+                          ? "line-through text-[#9B9B9B]"
+                          : "text-[#1A1A1A]"
                       }`}
                     >
                       {task.title}
                     </span>
                     {task.description && (
-                      <p className="text-[11px] text-gray-500 mt-0.5">
+                      <p className="text-[11px] text-[#6B6B6B] mt-0.5">
                         {task.description}
                       </p>
                     )}
@@ -120,7 +120,7 @@ const Tasks = () => {
                   {task.incidentId && (
                     <Link
                       to={`/incidents/${task.incidentId._id || task.incidentId}`}
-                      className="inline-flex items-center gap-1 font-mono text-[11px] text-sky-600 hover:underline bg-sky-50 px-2 py-0.5 rounded border border-sky-100"
+                      className="inline-flex items-center gap-1 font-mono text-[11px] text-[#6B1A1A] hover:underline bg-[#6B1A1A]/10 px-2.5 py-0.5 rounded-full border border-[#6B1A1A]/20"
                     >
                       <span>
                         {task.incidentId.incidentId || "View Case"}
@@ -128,7 +128,7 @@ const Tasks = () => {
                       <ExternalLink className="w-3 h-3" />
                     </Link>
                   )}
-                  <span className="text-[11px] text-gray-500 bg-gray-100 px-2 py-0.5 rounded font-medium">
+                  <span className="text-[11px] text-[#6B6B6B] bg-[#F5F1F0] px-2.5 py-1 rounded-md font-medium border border-[#E8E0DE]">
                     {task.assignedTo?.name || "Unassigned"}
                   </span>
                 </div>

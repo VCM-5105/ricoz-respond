@@ -6,15 +6,18 @@ const Navbar = ({ title, subtitle, searchProps }) => {
   const { user } = useAuth();
 
   return (
-    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-20">
-      {/* Title & Subtitle */}
-      <div>
-        <h1 className="text-base font-bold text-gray-900 leading-tight">
-          {title || "Dashboard"}
-        </h1>
-        {subtitle && (
-          <p className="text-xs text-gray-500 font-normal">{subtitle}</p>
-        )}
+    <header className="h-16 bg-white border-b border-[#E8E0DE] flex items-center justify-between px-8 sticky top-0 z-20 font-sans shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+      {/* Title & Subtitle with Live Pulse Dot */}
+      <div className="flex items-center gap-3">
+        <span className="live-dot" title="Operational - Live Connected" />
+        <div>
+          <h1 className="text-base font-bold text-[#1A1A1A] leading-tight">
+            {title || "Dashboard"}
+          </h1>
+          {subtitle && (
+            <p className="text-xs text-[#6B6B6B] font-normal">{subtitle}</p>
+          )}
+        </div>
       </div>
 
       {/* Right Controls */}
@@ -27,10 +30,10 @@ const Navbar = ({ title, subtitle, searchProps }) => {
               placeholder={searchProps.placeholder || "Search..."}
               value={searchProps.value}
               onChange={(e) => searchProps.onChange(e.target.value)}
-              className="w-64 pl-8 pr-3 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-sky-500 focus:bg-white transition-all text-gray-800 placeholder-gray-400"
+              className="w-64 pl-8 pr-3 py-1.5 text-xs bg-[#F5F1F0] border border-[#E8E0DE] rounded-lg focus:outline-none focus:border-[#6B1A1A] focus:bg-white transition-all text-[#1A1A1A] placeholder-[#9B9B9B]"
             />
             <svg
-              className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5"
+              className="w-3.5 h-3.5 text-[#9B9B9B] absolute left-2.5 top-2.5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -48,23 +51,23 @@ const Navbar = ({ title, subtitle, searchProps }) => {
         {/* Notifications */}
         <button
           title="Notifications"
-          className="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-50 transition-colors relative"
+          className="p-2 text-[#6B6B6B] hover:text-[#1A1A1A] rounded-lg hover:bg-[#F5F1F0] transition-colors relative"
         >
           <Bell className="w-4 h-4" />
-          <span className="w-1.5 h-1.5 bg-sky-500 rounded-full absolute top-1.5 right-1.5" />
+          <span className="w-1.5 h-1.5 bg-[#6B1A1A] rounded-full absolute top-1.5 right-1.5" />
         </button>
 
         {/* User Profile Info */}
-        <div className="flex items-center gap-2.5 pl-3 border-l border-gray-200">
-          <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-semibold uppercase shadow-xs">
+        <div className="flex items-center gap-2.5 pl-3 border-l border-[#E8E0DE]">
+          <div className="w-8 h-8 rounded-lg bg-[#6B1A1A] text-[#C9A96E] font-serif flex items-center justify-center text-xs font-semibold uppercase shadow-xs">
             {user?.name?.charAt(0) || "U"}
           </div>
           <div className="flex flex-col text-left">
-            <span className="text-xs font-semibold text-gray-800 leading-snug">
+            <span className="text-xs font-semibold text-[#1A1A1A] leading-snug">
               {user?.name || "Analyst"}
             </span>
-            <span className="text-[10px] text-gray-400 flex items-center gap-1">
-              <Shield className="w-2.5 h-2.5 text-sky-600" />
+            <span className="text-[10px] text-[#6B6B6B] flex items-center gap-1 font-medium">
+              <Shield className="w-2.5 h-2.5 text-[#6B1A1A]" />
               {user?.role?.name || "Security Analyst"}
             </span>
           </div>
