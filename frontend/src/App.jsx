@@ -14,6 +14,7 @@ import Evidence from "./pages/Evidence.jsx";
 import Team from "./pages/Team.jsx";
 import AuditLogs from "./pages/AuditLogs.jsx";
 import Settings from "./pages/Settings.jsx";
+import Landing from "./pages/Landing.jsx";
 import Loader from "./components/Loader.jsx";
 
 const PrivateRoute = ({ children }) => {
@@ -21,7 +22,7 @@ const PrivateRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-[#F0ECEB]">
         <Loader message="Verifying security credentials..." />
       </div>
     );
@@ -35,7 +36,7 @@ const PublicRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-[#F0ECEB]">
         <Loader message="Verifying security credentials..." />
       </div>
     );
@@ -49,6 +50,9 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          {/* Public Landing Page */}
+          <Route path="/" element={<Landing />} />
+
           {/* Public Auth Routes */}
           <Route
             path="/login"
@@ -75,7 +79,6 @@ function App() {
               </PrivateRoute>
             }
           >
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/incidents" element={<Incidents />} />
             <Route path="/incidents/:id" element={<IncidentDetails />} />
